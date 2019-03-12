@@ -1,7 +1,7 @@
 {
     "authors": ["Alban", "Arthur"],
     "questions": [
-                {
+		{
             "path": "../resources/logos/php_logo.png",
             "choices": ["C#", "PHP", "Java", "Program Hyper Polymorphe"],
             "response_idx": 1
