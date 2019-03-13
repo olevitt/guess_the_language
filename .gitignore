@@ -1,5 +1,7 @@
 .idea/
 *.iml
+server/target/*
+!server/target/.gitkeep
 
 .gradle
 client/local.properties
