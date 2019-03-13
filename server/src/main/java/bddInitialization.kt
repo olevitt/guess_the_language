@@ -16,10 +16,10 @@ fun initBdd() {
 
         if (conn != null) {
             var createTableReq = "CREATE IF NOT EXISTS users(\n"
-                + "id integer PRIMARY KEY, \n"
-                + "pseudo varchar(35), \n"
-                + "level integer, \n"
-                + "points integer \n"
+                + "id integer PRIMARY KEY AUTOINCREMENT, \n"
+                + "pseudo varchar(35) UNIQUE, \n"
+                + "level integer DEFAULT 0, \n"
+                + "points integer DEFAULT 0 \n"
                 + ");"
             var createTable = conn.prepareStatement(createTableReq)
 
