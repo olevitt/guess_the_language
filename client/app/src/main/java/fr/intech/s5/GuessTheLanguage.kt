@@ -15,7 +15,7 @@ class GuessTheLanguage: Activity() {
 
         val playButton : Button = findViewById(R.id.playButton)
         val rulesButton : Button = findViewById(R.id.rulesButton)
-        var pseudo : EditText = findViewById(R.id.pseudo)
+        var pseudo : EditText = findViewById(R.id.pseudoInput)
 
         playButton.setOnClickListener {
             if(!pseudo.text.isEmpty()) {
