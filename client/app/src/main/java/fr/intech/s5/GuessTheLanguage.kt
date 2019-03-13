@@ -13,18 +13,27 @@ class GuessTheLanguage: Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
 
-        val button : Button = findViewById(R.id.boutonPlay)
+        val playButton : Button = findViewById(R.id.playButton)
+        val rulesButton : Button = findViewById(R.id.rulesButton)
         var pseudo : EditText = findViewById(R.id.pseudo)
 
-        button.setOnClickListener {
+        playButton.setOnClickListener {
             if(!pseudo.text.isEmpty()) {
-                openGame()
+                launchGame()
             }
+        }
+        rulesButton.setOnClickListener {
+            launchRules()
         }
     }
 
-    fun openGame() {
+    fun launchGame() {
         val intent = Intent(this, Game::class.java)
+        startActivity(intent)
+    }
+
+    fun launchRules() {
+        val intent = Intent(this, Rules::class.java)
         startActivity(intent)
     }
 }
