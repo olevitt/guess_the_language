@@ -4,6 +4,7 @@ import io.javalin.Context
 import java.lang.Exception
 import java.sql.Connection
 import java.sql.DriverManager
+import java.sql.ResultSet
 
 fun accueil(ctx: Context) {
 }
@@ -20,14 +21,25 @@ fun subscribeOrConnect(ctx: Context) {
             var regex = "^[a-zA-Z0-9_]+$".toRegex()
             val pseudo = ctx.pathParam("pseudo")
 
-            if(regex.matches(pseudo)) {
+            var exists : Boolean?
+            var selectRequest = "SELECT * FROM users WHERE pseudo = $pseudo"
+            val select = conn.createStatement()
+            var result : ResultSet = select.executeQuery(selectRequest)
 
-                var insertRequest = "INSERT OR IGNORE INTO users(pseudo) VALUES($pseudo)"
-                val insert = conn.prepareStatement(insertRequest)
-                insert.executeUpdate()
+            if(!result.wasNull()){
+                if(regex.matches(pseudo)) {
 
+                    var insertRequest = "INSERT OR IGNORE INTO users(pseudo) VALUES($pseudo)"
+                    val insert = conn.prepareStatement(insertRequest)
+                    insert.executeUpdate()
+                    conn.close()
+
+                } else {
+                    //WRONG PSEUDO
+                }
             } else {
-                //BAD REQUEST
+                conn.close()
+                //ALREADY EXISTS
             }
         }
     } catch(e : Exception) {
@@ -36,6 +48,16 @@ fun subscribeOrConnect(ctx: Context) {
 }
 
 fun nextLevel(ctx: Context) {
+    try {
+        var conn: Connection? = DriverManager.getConnection(utils.BDD_URL)
+
+        if (conn != null) {
+
+        }
+
+    } catch(e : Exception) {
+        e.printStackTrace()
+    }
 }
 
 fun getMoreLogo(ctx: Context) {
